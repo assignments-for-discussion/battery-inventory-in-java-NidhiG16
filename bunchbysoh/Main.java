@@ -34,10 +34,10 @@ public class Main {
     System.out.println("Batteries to exchange: "+counts.exchange);
     System.out.println("Failed batteries: "+counts.failed);
     int[] edgeTestCapacities = {100, 120, 75}; //to test for egde cases (100,83,62)
-    assert(counts.healthy == 2);
-    assert(counts.exchange == 0);
-    assert(counts.failed == 1);
     CountsBySoH edgeCounts = countBatteriesByHealth(edgeTestCapacities);
+    assert(edgeCounts.healthy == 2);
+    assert(edgeCounts.exchange == 0);
+    assert(edgeCounts.failed == 1);
     System.out.println("Healthy batteries: "+edgeCounts.healthy);
     System.out.println("Batteries to exchange: "+edgeCounts.exchange);
     System.out.println("Failed batteries: "+edgeCounts.failed);
