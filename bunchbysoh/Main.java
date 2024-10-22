@@ -9,6 +9,17 @@ public class Main {
 
   static CountsBySoH countBatteriesByHealth(int[] presentCapacities) {
     CountsBySoH counts = new CountsBySoH();
+    int ratedCapacity=120;
+    for(int i:presentCapacities){
+      float soh=100*i/ratedCapacity;
+      if(soh>=83 && soh<=100){
+        counts.healthy++;
+      }else if(soh<83 && soh>63){
+        counts.exchange++;
+      }else{
+        counts.failed++;
+      }
+    }
     return counts;
   }
 
@@ -19,6 +30,17 @@ public class Main {
     assert(counts.healthy == 2);
     assert(counts.exchange == 3);
     assert(counts.failed == 1);
+    System.out.println("Healthy batteries: "+counts.healthy);
+    System.out.println("Batteries to exchange: "+counts.exchange);
+    System.out.println("Failed batteries: "+counts.failed);
+    int[] edgeTestCapacities = {100, 120, 75}; //to test for egde cases (100,83,62)
+    CountsBySoH edgeCounts = countBatteriesByHealth(edgeTestCapacities);
+    assert(edgeCounts.healthy == 2);
+    assert(edgeCounts.exchange == 0);
+    assert(edgeCounts.failed == 1);
+    System.out.println("Healthy batteries: "+edgeCounts.healthy);
+    System.out.println("Batteries to exchange: "+edgeCounts.exchange);
+    System.out.println("Failed batteries: "+edgeCounts.failed);
     System.out.println("Done counting :)\n");
   }
 
